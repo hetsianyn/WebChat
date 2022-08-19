@@ -1,0 +1,41 @@
+[
+  {
+    "FirstName": "Harry",
+    "LastName": "Potter",
+    "Photo": "photo.jpg",
+    "Messages": [
+      {
+        "RoomId" : 1,
+        "Content": "Hello!",
+        "Date": "2022-01-06T17:16:40"
+      },
+      {
+        "RoomId" : 1,
+        "Content": "How are you?",
+        "Date": "2022-01-06T18:16:40"
+      }
+    ]
+  },
+  {
+    "FirstName": "John",
+    "LastName": "Doe",
+    "Photo": "photo.jpg",
+    "Messages": [
+      {
+        "RoomId" : 1,
+        "Content": "Hi!",
+        "Date": "2022-01-06T18:17:40"
+      },
+      {
+        "RoomId" : 1,
+        "Content": "Good!",
+        "Date": "2022-01-06T18:18:40"
+      },
+      {
+        "RoomId" : 2,
+        "Content": "Hi!",
+        "Date": "2022-01-06T18:19:40"
+      }
+    ]
+  }
+]

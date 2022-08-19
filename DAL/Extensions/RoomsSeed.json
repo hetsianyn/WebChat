@@ -1,0 +1,14 @@
+[
+  {
+    "Name" : "Room1",
+    "Type": true
+  },
+  {
+    "Name" : "Room2",
+    "Type": true
+  },
+  {
+    "Name" : "Room3",
+    "Type": false
+  }
+]
