@@ -9,5 +9,5 @@ public class User
     public string LastName { get; set; }
     public string? Photo { get; set; }
     public ICollection<Message> Messages { get; set; }
-    public ICollection<Room> Rooms { get; set; }
+    public ICollection<Participation> Participations { get; set; }
 }

@@ -24,6 +24,7 @@ public class DataContext : DbContext
     public DbSet<User> Users { get; set; }
     public DbSet<Message> Messages { get; set; }
     public DbSet<Room> Rooms { get; set; }
+    public DbSet<Participation> Participations { get; set; }
     // public DbSet<RoomUser> RoomUser { get; set; }
     
     protected override void OnModelCreating(ModelBuilder builder)
@@ -33,7 +34,6 @@ public class DataContext : DbContext
         builder.ApplyConfiguration(new UserTypeConfiguration());
         builder.ApplyConfiguration(new RoomTypeConfiguration());
         builder.ApplyConfiguration(new MessageTypeConfiguration());
-
-        
+        builder.ApplyConfiguration(new ParticipationTypeConfiguration());
     } 
 }

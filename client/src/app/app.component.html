@@ -1,0 +1,24 @@
+<mat-toolbar>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    <mat-icon (click)="onPress()">menu</mat-icon>
+  </button>
+  <span>Web Chat</span>
+  <span class="example-spacer"></span>
+  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+    <mat-icon>favorite</mat-icon>
+  </button>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+    <mat-icon>share</mat-icon>
+  </button>
+</mat-toolbar>
+<div class="container">
+  <div class="room-list" *ngIf="display">
+    <app-room-list></app-room-list>
+  </div>
+  <div class="messages-container">
+  <app-group-messages></app-group-messages>
+  </div>
+</div>
+
+
+<!--<router-outlet></router-outlet>-->

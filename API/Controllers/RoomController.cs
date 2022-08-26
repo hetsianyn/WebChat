@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api")]
 public class RoomController : ControllerBase
 {
     private readonly IRoomRepository _roomRepository;
@@ -18,7 +18,7 @@ public class RoomController : ControllerBase
         _mapper = mapper;
     }
     
-    [HttpGet("{id}")]
+    [HttpGet("rooms/{id}")]
     public async Task<ActionResult> GetRoomMessages(int id)
     {
         var messages = await _roomRepository.GetMessages(id);
@@ -49,5 +49,13 @@ public class RoomController : ControllerBase
         var response = await _roomRepository.EditMessage(id, messageDto);
 
         return StatusCode(201, response);
+    }
+    
+    //Get all rooms
+    [HttpGet("rooms")]
+    public async Task<ActionResult> GetAllRooms()
+    {
+        var rooms = await _roomRepository.GetRooms();
+        return Ok(rooms);
     }
 }

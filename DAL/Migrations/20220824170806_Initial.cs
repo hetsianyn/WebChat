@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DAL.Migrations
 {
-    public partial class Initital : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -67,24 +67,26 @@ namespace DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "RoomUser",
+                name: "Participations",
                 columns: table => new
                 {
-                    RoomsId = table.Column<int>(type: "INTEGER", nullable: false),
-                    UsersId = table.Column<int>(type: "INTEGER", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    UserId = table.Column<int>(type: "INTEGER", nullable: false),
+                    RoomId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RoomUser", x => new { x.RoomsId, x.UsersId });
+                    table.PrimaryKey("PK_Participations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_RoomUser_Rooms_RoomsId",
-                        column: x => x.RoomsId,
+                        name: "FK_Participations_Rooms_RoomId",
+                        column: x => x.RoomId,
                         principalTable: "Rooms",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_RoomUser_Users_UsersId",
-                        column: x => x.UsersId,
+                        name: "FK_Participations_Users_UserId",
+                        column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -107,15 +109,26 @@ namespace DAL.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Rooms_Id",
-                table: "Rooms",
+                name: "IX_Participations_Id",
+                table: "Participations",
                 column: "Id",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_RoomUser_UsersId",
-                table: "RoomUser",
-                column: "UsersId");
+                name: "IX_Participations_RoomId",
+                table: "Participations",
+                column: "RoomId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Participations_UserId",
+                table: "Participations",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Rooms_Id",
+                table: "Rooms",
+                column: "Id",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_Id",
@@ -130,7 +143,7 @@ namespace DAL.Migrations
                 name: "Messages");
 
             migrationBuilder.DropTable(
-                name: "RoomUser");
+                name: "Participations");
 
             migrationBuilder.DropTable(
                 name: "Rooms");

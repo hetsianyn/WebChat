@@ -78,5 +78,14 @@ public class RoomRepository : IRoomRepository
 
         return messageId;
     }
+
+    public async Task<IEnumerable<RoomDto>> GetRooms()
+    {
+        var rooms = await _context.Rooms
+            .Include(x => x.Participations)
+            .ToListAsync();
+    
+        return _mapper.Map<IEnumerable<RoomDto>>(rooms);
+    }
 }
     

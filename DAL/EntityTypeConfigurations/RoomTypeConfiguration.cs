@@ -12,8 +12,7 @@ public class RoomTypeConfiguration : IEntityTypeConfiguration<Room>
         builder.HasIndex(x => x.Id).IsUnique();
         builder.Property(x => x.Name).IsRequired();
         builder.Property(x => x.Type).IsRequired();
-        builder.HasMany(x => x.Users).WithMany(u => u.Rooms);
         builder.HasMany(x => x.Messages).WithOne(m => m.Room).HasForeignKey(x => x.RoomId);
-
+        builder.HasMany(x => x.Participations).WithOne(m => m.Room).HasForeignKey(x => x.RoomId);
     }
 }

@@ -1,0 +1,20 @@
+.example-spacer {
+  flex: 1 1 auto;
+  border-style: none;
+}
+
+
+.container{
+  display: flex;
+  flex-direction: row;
+}
+
+.room-list{
+  border-style: solid;
+  width: 300px
+}
+
+.messages-container{
+  border-style: solid;
+}
+

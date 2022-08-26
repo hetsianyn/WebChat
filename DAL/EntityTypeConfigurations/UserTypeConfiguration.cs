@@ -13,6 +13,6 @@ public class UserTypeConfiguration : IEntityTypeConfiguration<User>
         builder.Property(x => x.FirstName).IsRequired();
         builder.Property(x => x.LastName).IsRequired();
         builder.HasMany(x => x.Messages).WithOne(x => x.User).HasForeignKey(x => x.UserId);
-        builder.HasMany(x => x.Rooms).WithMany(x => x.Users);
+        builder.HasMany(x => x.Participations).WithOne(m => m.User).HasForeignKey(x => x.UserId);
     }
 }

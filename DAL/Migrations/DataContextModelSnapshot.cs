@@ -48,6 +48,30 @@ namespace DAL.Migrations
                     b.ToTable("Messages", (string)null);
                 });
 
+            modelBuilder.Entity("Domain.Models.Participation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("RoomId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Id")
+                        .IsUnique();
+
+                    b.HasIndex("RoomId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Participations", (string)null);
+                });
+
             modelBuilder.Entity("Domain.Models.Room", b =>
                 {
                     b.Property<int>("Id")
@@ -94,21 +118,6 @@ namespace DAL.Migrations
                     b.ToTable("Users", (string)null);
                 });
 
-            modelBuilder.Entity("RoomUser", b =>
-                {
-                    b.Property<int>("RoomsId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("UsersId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("RoomsId", "UsersId");
-
-                    b.HasIndex("UsersId");
-
-                    b.ToTable("RoomUser");
-                });
-
             modelBuilder.Entity("Domain.Models.Message", b =>
                 {
                     b.HasOne("Domain.Models.Room", "Room")
@@ -128,29 +137,37 @@ namespace DAL.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("RoomUser", b =>
+            modelBuilder.Entity("Domain.Models.Participation", b =>
                 {
-                    b.HasOne("Domain.Models.Room", null)
-                        .WithMany()
-                        .HasForeignKey("RoomsId")
+                    b.HasOne("Domain.Models.Room", "Room")
+                        .WithMany("Participations")
+                        .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Models.User", null)
-                        .WithMany()
-                        .HasForeignKey("UsersId")
+                    b.HasOne("Domain.Models.User", "User")
+                        .WithMany("Participations")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Room");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Domain.Models.Room", b =>
                 {
                     b.Navigation("Messages");
+
+                    b.Navigation("Participations");
                 });
 
             modelBuilder.Entity("Domain.Models.User", b =>
                 {
                     b.Navigation("Messages");
+
+                    b.Navigation("Participations");
                 });
 #pragma warning restore 612, 618
         }

@@ -11,5 +11,9 @@ public class AutoMapperProfiles : Profile
         CreateMap<Message, MessageDto>();
         CreateMap<Room, RoomReadDto>();
         CreateMap<MessageDto, Message>();
+        CreateMap<Room, RoomDto>()
+            .ForMember(dest => dest.ParticipantsNum, 
+                opt => opt.MapFrom(user => user.Participations
+                    .Count(x => x.RoomId == user.Id)));
     }
 }
