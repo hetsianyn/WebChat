@@ -11,7 +11,6 @@ import {RoomDetailed} from "../models/room-detailed";
 export class RoomService {
 
   private url = "rooms";
-  private id = 1;
 
   constructor(private http: HttpClient) { }
 

@@ -3,18 +3,16 @@
   border-style: none;
 }
 
-
 .container{
   display: flex;
   flex-direction: row;
 }
 
 .room-list{
-  border-style: solid;
-  width: 300px
+  width: 300px;
 }
 
 .messages-container{
-  border-style: solid;
+  width: 100%;
 }
 

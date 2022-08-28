@@ -1,0 +1,10 @@
+.room-card {
+  max-width: 300px;
+  margin-bottom: 2px;
+  border-right-style: none;
+  background-color: #f4f4f4;
+}
+.mat-card-subtitle{
+  display: flex;
+  padding-top: 0.5em;
+}

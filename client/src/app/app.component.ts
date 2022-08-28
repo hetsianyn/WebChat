@@ -1,5 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import {Room} from "./models/room";
+import {RoomService} from "./services/room.service";
+import {DataService} from "./services/data.service";
 
 @Component({
   selector: 'app-root',
@@ -11,9 +14,13 @@ export class AppComponent implements OnInit{
   title = "Web Chat";
   display = false;
 
-  constructor(private http:HttpClient) {}
 
-  ngOnInit() {
+  constructor(private http:HttpClient,
+              private roomService: RoomService,
+              private dataService: DataService) {}
+
+  ngOnInit(): void {
+    this.getAllRooms();
   }
 
   onPress() {
@@ -22,4 +29,35 @@ export class AppComponent implements OnInit{
     //To toggle the component
     this.display = !this.display;
   }
+
+  rooms: Room[] = [];
+
+  roomId: number = 1;
+
+
+
+  getAllRooms(){
+    this.roomService.getAllRooms()
+      .subscribe(response => {
+          this.rooms = response;
+        }
+      );
+  }
+
+  roomSelectedEvent(room: Room){
+
+    console.log("Card SELECTED...");
+
+    console.log(room.id);
+
+    this.changeId(room.id);
+
+    this.roomId++;
+  }
+
+  changeId(roomId: number){
+    this.dataService.changeId(roomId);
+  }
+
+
 }

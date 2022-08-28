@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Message} from "../../models/message";
 import {RoomService} from "../../services/room.service";
 import {RoomDetailed} from "../../models/room-detailed";
+import {D} from "@angular/cdk/keycodes";
+import {DataService} from "../../services/data.service";
 
 @Component({
   selector: 'app-group-messages',
@@ -10,12 +12,23 @@ import {RoomDetailed} from "../../models/room-detailed";
 })
 export class GroupMessagesComponent implements OnInit {
 
-  roomDetails: any;
-  roomId: number = 1;
+  roomDetails: RoomDetailed = {
+    id: 2,
+    name: "d",
+    type: true,
+    participantsNum: 1,
+    messages: []
+  };
+  roomId: number;
 
-  constructor(private roomService: RoomService) { }
+  @Input()
+  trigger: number;
+
+  constructor(private roomService: RoomService,
+              private dataService: DataService) { }
 
   ngOnInit(): void {
+    this.subscribe();
     this.getMessages(this.roomId);
   }
 
@@ -26,5 +39,14 @@ export class GroupMessagesComponent implements OnInit {
         }
       );
   }
+
+  subscribe(){
+    this.dataService.roomId.subscribe(data =>{
+      this.roomId = data;
+    });
+
+    console.log(this.roomId);
+  }
+
 
 }

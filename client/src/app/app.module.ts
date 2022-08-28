@@ -12,12 +12,15 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from "@angular/material/button";
 import { GroupMessagesComponent } from './components/group-messages/group-messages.component';
+import { RoomListItemComponent } from './components/room-list-item/room-list-item.component';
+import {NgxRerenderModule} from "ngx-rerender";
 
 @NgModule({
   declarations: [
     AppComponent,
     RoomListComponent,
-    GroupMessagesComponent
+    GroupMessagesComponent,
+    RoomListItemComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,8 @@ import { GroupMessagesComponent } from './components/group-messages/group-messag
     MatCardModule,
     MatToolbarModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    NgxRerenderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

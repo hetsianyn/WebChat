@@ -13,10 +13,12 @@
 </mat-toolbar>
 <div class="container">
   <div class="room-list" *ngIf="display">
-    <app-room-list></app-room-list>
+    <app-room-list-item *ngFor="let room of rooms"
+                        (roomSelected)="roomSelectedEvent($event)"
+                        [room]="room"></app-room-list-item>
   </div>
   <div class="messages-container">
-  <app-group-messages></app-group-messages>
+    <app-group-messages *mcRerender="roomId"></app-group-messages>
   </div>
 </div>
 
