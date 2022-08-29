@@ -4,4 +4,5 @@ export interface Message{
   content: string;
   date: Date;
   userId: number;
+  roomId: number;
 }

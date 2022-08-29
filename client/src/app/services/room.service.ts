@@ -4,6 +4,7 @@ import {Room} from "../models/room";
 import {Observable} from "rxjs";
 import {environment} from "../../environments/environment";
 import {RoomDetailed} from "../models/room-detailed";
+import {Message} from "../models/message";
 
 @Injectable({
   providedIn: 'root'
@@ -22,4 +23,9 @@ export class RoomService {
   getRoomMessages(roomId: number): Observable<RoomDetailed>{
     return this.http.get<RoomDetailed>(`${environment.apiUrl}/${this.url}/${roomId}`)
   }
+
+  createMessage(roomId: number, message: Message): Observable<Message>{
+    return this.http.post<Message>(`${environment.apiUrl}/message`, message);
+  }
+
 }

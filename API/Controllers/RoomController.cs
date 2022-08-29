@@ -26,11 +26,11 @@ public class RoomController : ControllerBase
         return Ok(messages);
     }
     
-    [HttpPut("{id}/message")]
-    public async Task<ActionResult> SendMessage(int id, 
-        [FromForm] MessageDto messageDto)
+    [HttpPost("message")]
+    public async Task<ActionResult> SendMessage(
+        [FromBody] MessageDto messageDto)
     {
-        var response = await _roomRepository.SendMessage(id, messageDto);
+        var response = await _roomRepository.SendMessage(messageDto);
 
         return StatusCode(201, response);
     }

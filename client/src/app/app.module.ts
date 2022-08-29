@@ -14,26 +14,28 @@ import {MatButtonModule} from "@angular/material/button";
 import { GroupMessagesComponent } from './components/group-messages/group-messages.component';
 import { RoomListItemComponent } from './components/room-list-item/room-list-item.component';
 import {NgxRerenderModule} from "ngx-rerender";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
     AppComponent,
     RoomListComponent,
     GroupMessagesComponent,
-    RoomListItemComponent
+    RoomListItemComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MatSliderModule,
-    MatCardModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatButtonModule,
-    NgxRerenderModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        MatSliderModule,
+        MatCardModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatButtonModule,
+        NgxRerenderModule,
+        FormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

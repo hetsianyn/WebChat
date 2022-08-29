@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Room} from "./models/room";
 import {RoomService} from "./services/room.service";
@@ -58,6 +58,8 @@ export class AppComponent implements OnInit{
   changeId(roomId: number){
     this.dataService.changeId(roomId);
   }
+
+
 
 
 }

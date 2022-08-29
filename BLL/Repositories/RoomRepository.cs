@@ -31,23 +31,38 @@ public class RoomRepository : IRoomRepository
         return _mapper.Map<RoomReadDto>(room);
     }
 
-    public async Task<int> SendMessage(int userId, MessageDto messageDto)
+    // public async Task<int> SendMessage(int userId, MessageDto messageDto)
+    // {
+    //
+    //     var user = await _context.Users
+    //         .Include(x => x.Messages)
+    //         .FirstOrDefaultAsync(x => x.Id == userId);
+    //
+    //     // if (user == null)
+    //     //     throw new NotFoundException(nameof(User), userId);
+    //
+    //     var message = _mapper.Map<Message>(messageDto);
+    //
+    //     user.Messages.Add(message);
+    //
+    //     await _context.SaveChangesAsync();
+    //
+    //     return userId;
+    // }
+
+    public async Task<int> SendMessage(MessageDto messageDto)
     {
-
         var user = await _context.Users
-            .Include(x => x.Messages)
-            .FirstOrDefaultAsync(x => x.Id == userId);
-
-        // if (user == null)
-        //     throw new NotFoundException(nameof(User), userId);
-
+        .Include(x => x.Messages)
+        .FirstOrDefaultAsync(x => x.Id == messageDto.UserId);
+        
         var message = _mapper.Map<Message>(messageDto);
-
+        
         user.Messages.Add(message);
-
+        
         await _context.SaveChangesAsync();
-
-        return userId;
+        
+        return messageDto.UserId;
     }
 
     public async Task<int> DeleteMessage(int messageId)

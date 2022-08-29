@@ -1,5 +1,7 @@
-<div>
-  <p>{{roomDetails.name}}</p>
+<div class="chat">
+  <div class="chat-header">
+    <div class="-title">{{roomDetails.name}}</div>
+  </div>
   <div class="msg-container">
   <div class="msg" *ngFor="let message of roomDetails.messages">
     <div class="msg-profile">
@@ -11,8 +13,11 @@
     </div>
   </div>
     <div class="chat-footer">
-      <input type="text" placeholder="Type something here..." />
-      <button>Send</button>
+      <input type="text"  name="Content" placeholder="Type something here..."
+             [(ngModel)]="message.content" />
+      <button mat-icon-button class="send-button" [(ngModel)]="message.roomId" (click)="sendMessage(message)">
+        <mat-icon>send</mat-icon>
+      </button>
     </div>
   </div>
 </div>

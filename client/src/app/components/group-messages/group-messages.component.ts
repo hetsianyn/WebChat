@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Message} from "../../models/message";
 import {RoomService} from "../../services/room.service";
 import {RoomDetailed} from "../../models/room-detailed";
@@ -12,6 +12,8 @@ import {DataService} from "../../services/data.service";
 })
 export class GroupMessagesComponent implements OnInit {
 
+  dateFormated = new Date;
+
   roomDetails: RoomDetailed = {
     id: 2,
     name: "d",
@@ -20,9 +22,21 @@ export class GroupMessagesComponent implements OnInit {
     messages: []
   };
   roomId: number;
+  dateNow: number = Date.now();
+
+  message: Message = {
+    content: '',
+    date: new Date(this.dateNow),
+    userId: 1,
+    roomId: this.subscribe()
+  }
+
 
   @Input()
   trigger: number;
+
+  @Output()
+  newMessage = new EventEmitter<Message>();
 
   constructor(private roomService: RoomService,
               private dataService: DataService) { }
@@ -45,8 +59,13 @@ export class GroupMessagesComponent implements OnInit {
       this.roomId = data;
     });
 
-    console.log(this.roomId);
+
+    return this.roomId;
   }
 
+  sendMessage(message: Message){
+    this.roomService.createMessage(this.roomId, message)
+      .subscribe((message: Message) => this.newMessage.emit(message));
+  }
 
 }
