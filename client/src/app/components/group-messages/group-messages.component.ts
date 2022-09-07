@@ -33,6 +33,7 @@ export class GroupMessagesComponent implements OnInit {
 
   selectedMessageId: number;
   deletedMessageId: number;
+  display: boolean = false;
 
 
   @Input()
@@ -62,13 +63,7 @@ export class GroupMessagesComponent implements OnInit {
       this.roomId = data;
     });
 
-
     return this.roomId;
-  }
-
-  sendMessage(message: Message){
-    this.roomService.createMessage(this.roomId, message)
-      .subscribe((message: Message) => this.newMessage.emit(message));
   }
 
   messageSelectedEvent(message: Message){
@@ -78,13 +73,18 @@ export class GroupMessagesComponent implements OnInit {
     console.log(message.id);
 
     this.selectedMessageId = message.id;
+
+    this.display = !this.display;
+  }
+
+  sendMessage(message: Message){
+    this.roomService.createMessage(this.roomId, message)
+      .subscribe((message: Message) => this.newMessage.emit(message));
   }
 
   deleteMessage(){
     this.roomService.deleteMessage(this.selectedMessageId)
       .subscribe(response => this.deletedMessageId)
   }
-
-
 
 }

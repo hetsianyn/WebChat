@@ -5,16 +5,23 @@
   <div class="msg-container">
     <app-message-item *ngFor="let message of roomDetails.messages"
                       (messageSelected)="messageSelectedEvent($event)"
-                      [message]="message"></app-message-item>
+                      [message]="message">
+    </app-message-item>
     <div class="chat-footer">
       <input type="text"  name="Content" placeholder="Type something here..."
              [(ngModel)]="messageTemplate.content" />
-      <button mat-icon-button class="send-button" [(ngModel)]="messageTemplate.roomId"
-              (click)="sendMessage(messageTemplate)">
+      <button mat-icon-button class="send-button" *ngIf="!display"
+              [(ngModel)]="messageTemplate.roomId"
+              (click)="sendMessage(messageTemplate)" ngDefaultControl>
         <mat-icon>send</mat-icon>
       </button>
-      <button mat-icon-button class="send-button" (click)="deleteMessage()">
+      <button mat-icon-button class="send-button" *ngIf="display" (click)="deleteMessage()">
         <mat-icon>delete</mat-icon>
+      </button>
+      <button mat-icon-button class="send-button" *ngIf="display"
+              [(ngModel)]="messageTemplate.roomId"
+              (click)="sendMessage(messageTemplate); deleteMessage();" ngDefaultControl>
+        <mat-icon>edit</mat-icon>
       </button>
     </div>
   </div>

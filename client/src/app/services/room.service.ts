@@ -32,4 +32,8 @@ export class RoomService {
     return this.http.delete(`${environment.apiUrl}/message/${messageId}`);
   }
 
+  // editMessage(messageId: number, message: Message): Observable<Message>{
+  //   return this.http.put<Message>(`${environment.apiUrl}/message/edit/${messageId}`, message);
+  // }
+
 }
