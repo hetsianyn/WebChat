@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HttpClientModule} from "@angular/common/http";
-import { RoomListComponent } from './components/room-list/room-list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
 import {MatCardModule} from '@angular/material/card';
@@ -15,13 +14,16 @@ import { GroupMessagesComponent } from './components/group-messages/group-messag
 import { RoomListItemComponent } from './components/room-list-item/room-list-item.component';
 import {NgxRerenderModule} from "ngx-rerender";
 import {FormsModule} from "@angular/forms";
+import { DeleteMessageComponent } from './components/delete-message/delete-message.component';
+import { MessageItemComponent } from './components/message-item/message-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RoomListComponent,
     GroupMessagesComponent,
     RoomListItemComponent,
+    DeleteMessageComponent,
+    MessageItemComponent,
   ],
     imports: [
         BrowserModule,

@@ -11,9 +11,8 @@
 
 .room-list{
   width: 300px;
-  overflow: scroll;
+  overflow-y: scroll;
 }
-
 
 
 

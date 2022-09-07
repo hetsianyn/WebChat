@@ -12,8 +12,6 @@ import {DataService} from "../../services/data.service";
 })
 export class GroupMessagesComponent implements OnInit {
 
-  dateFormated = new Date;
-
   roomDetails: RoomDetailed = {
     id: 2,
     name: "d",
@@ -21,15 +19,20 @@ export class GroupMessagesComponent implements OnInit {
     participantsNum: 1,
     messages: []
   };
+
   roomId: number;
+
   dateNow: number = Date.now();
 
-  message: Message = {
+  messageTemplate: Message = {
     content: '',
     date: new Date(this.dateNow),
     userId: 1,
     roomId: this.subscribe()
   }
+
+  selectedMessageId: number;
+  deletedMessageId: number;
 
 
   @Input()
@@ -67,5 +70,21 @@ export class GroupMessagesComponent implements OnInit {
     this.roomService.createMessage(this.roomId, message)
       .subscribe((message: Message) => this.newMessage.emit(message));
   }
+
+  messageSelectedEvent(message: Message){
+
+    console.log("Message selected");
+
+    console.log(message.id);
+
+    this.selectedMessageId = message.id;
+  }
+
+  deleteMessage(){
+    this.roomService.deleteMessage(this.selectedMessageId)
+      .subscribe(response => this.deletedMessageId)
+  }
+
+
 
 }

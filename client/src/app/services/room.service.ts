@@ -28,4 +28,8 @@ export class RoomService {
     return this.http.post<Message>(`${environment.apiUrl}/message`, message);
   }
 
+  deleteMessage(messageId: number){
+    return this.http.delete(`${environment.apiUrl}/message/${messageId}`);
+  }
+
 }

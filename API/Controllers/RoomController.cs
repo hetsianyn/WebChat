@@ -18,6 +18,7 @@ public class RoomController : ControllerBase
         _mapper = mapper;
     }
     
+    //Get room details by id(with messages)
     [HttpGet("rooms/{id}")]
     public async Task<ActionResult> GetRoomMessages(int id)
     {
@@ -26,6 +27,7 @@ public class RoomController : ControllerBase
         return Ok(messages);
     }
     
+    //Create message
     [HttpPost("message")]
     public async Task<ActionResult> SendMessage(
         [FromBody] MessageDto messageDto)
@@ -35,7 +37,8 @@ public class RoomController : ControllerBase
         return StatusCode(201, response);
     }
 
-    [HttpDelete("/message/{id}")]
+    //Delete message, return message id response
+    [HttpDelete("message/{id}")]
     public async Task<ActionResult> DeleteMessage(int id)
     {
         var response = await _roomRepository.DeleteMessage(id);
@@ -43,6 +46,7 @@ public class RoomController : ControllerBase
         return StatusCode(201, response);
     }
     
+    //Edit message by id
     [HttpPut("/message/edit/{id}")]
     public async Task<ActionResult> UpdateMessage(int id, MessageDto messageDto)
     {

@@ -3,20 +3,18 @@
     <div class="-title">{{roomDetails.name}}</div>
   </div>
   <div class="msg-container">
-  <div class="msg" *ngFor="let message of roomDetails.messages">
-    <div class="msg-profile">
-      <div class="msg-user">User{{message.userId}}</div>
-      <div class="msg-date">{{message.date}}</div>
-    </div>
-    <div class="msg-content">
-      <div class="msg-text">{{message.content}}</div>
-    </div>
-  </div>
+    <app-message-item *ngFor="let message of roomDetails.messages"
+                      (messageSelected)="messageSelectedEvent($event)"
+                      [message]="message"></app-message-item>
     <div class="chat-footer">
       <input type="text"  name="Content" placeholder="Type something here..."
-             [(ngModel)]="message.content" />
-      <button mat-icon-button class="send-button" [(ngModel)]="message.roomId" (click)="sendMessage(message)">
+             [(ngModel)]="messageTemplate.content" />
+      <button mat-icon-button class="send-button" [(ngModel)]="messageTemplate.roomId"
+              (click)="sendMessage(messageTemplate)">
         <mat-icon>send</mat-icon>
+      </button>
+      <button mat-icon-button class="send-button" (click)="deleteMessage()">
+        <mat-icon>delete</mat-icon>
       </button>
     </div>
   </div>
