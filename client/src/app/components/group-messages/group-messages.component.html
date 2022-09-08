@@ -1,13 +1,15 @@
 <div class="chat">
   <div class="chat-header">
-    <div class="-title">{{roomDetails.name}}</div>
+    <div class="title">{{roomDetails.name}}</div>
   </div>
-  <div class="msg-container">
-    <app-message-item *ngFor="let message of roomDetails.messages"
-                      (messageSelected)="messageSelectedEvent($event)"
-                      [message]="message">
-    </app-message-item>
-    <div class="chat-footer">
+  <div class="messages-window">
+    <div class="messages">
+      <app-message-item *ngFor="let message of roomDetails.messages"
+                        (messageSelected)="messageSelectedEvent($event)"
+                        [message]="message">
+      </app-message-item>
+    </div>
+    <div class="chat-footer" [ngStyle]="{'background-color': (display == true) ? 'blue' : null}">
       <input type="text"  name="Content" placeholder="Type something here..."
              [(ngModel)]="messageTemplate.content" />
       <button mat-icon-button class="send-button" *ngIf="!display"

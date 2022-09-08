@@ -79,12 +79,22 @@ export class GroupMessagesComponent implements OnInit {
 
   sendMessage(message: Message){
     this.roomService.createMessage(this.roomId, message)
-      .subscribe((message: Message) => this.newMessage.emit(message));
+      .subscribe((message: Message) => {
+        this.newMessage.emit(message);
+        this.ngOnInit()
+      });
+
+    this.messageTemplate.content = '';
   }
 
   deleteMessage(){
     this.roomService.deleteMessage(this.selectedMessageId)
-      .subscribe(response => this.deletedMessageId)
+      .subscribe(response => {
+        this.deletedMessageId;
+        this.ngOnInit();
+      })
+
+    this.display = !this.display;
   }
 
 }

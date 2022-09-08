@@ -4,6 +4,6 @@
     <div class="msg-date">{{message.date}}</div>
   </div>
   <div class="msg-content">
-    <div class="msg-text">{{message.content}}</div>
+    <div class="msg-text" [ngStyle]="{'background-color': (message.userId == 1) ? '#e9fbfb' : null}">{{message.content}}</div>
   </div>
 </div>
