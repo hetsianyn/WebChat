@@ -14,7 +14,6 @@ import { GroupMessagesComponent } from './components/group-messages/group-messag
 import { RoomListItemComponent } from './components/room-list-item/room-list-item.component';
 import {NgxRerenderModule} from "ngx-rerender";
 import {FormsModule} from "@angular/forms";
-import { DeleteMessageComponent } from './components/delete-message/delete-message.component';
 import { MessageItemComponent } from './components/message-item/message-item.component';
 
 @NgModule({
@@ -22,7 +21,6 @@ import { MessageItemComponent } from './components/message-item/message-item.com
     AppComponent,
     GroupMessagesComponent,
     RoomListItemComponent,
-    DeleteMessageComponent,
     MessageItemComponent,
   ],
     imports: [

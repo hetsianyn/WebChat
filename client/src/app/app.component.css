@@ -8,7 +8,7 @@
 .container{
   display: flex;
   flex-direction: row;
-  height: 850px;
+  height: 93vh;
 }
 
 .room-list{

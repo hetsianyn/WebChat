@@ -24,8 +24,6 @@ export class AppComponent implements OnInit{
   }
 
   onPress() {
-    //this.display = true;
-
     //To toggle the component
     this.display = !this.display;
   }
@@ -58,8 +56,6 @@ export class AppComponent implements OnInit{
   changeId(roomId: number){
     this.dataService.changeId(roomId);
   }
-
-
 
 
 }

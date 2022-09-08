@@ -3,21 +3,23 @@
     <div class="title">{{roomDetails.name}}</div>
   </div>
   <div class="messages-window">
-    <div class="messages">
+    <div class="messages"  #scrollMe [scrollTop]="scrollMe.scrollHeight">
       <app-message-item *ngFor="let message of roomDetails.messages"
                         (messageSelected)="messageSelectedEvent($event)"
                         [message]="message">
       </app-message-item>
-    </div>
-    <div class="chat-footer" [ngStyle]="{'background-color': (display == true) ? 'blue' : null}">
+
+    <div class="chat-footer" [ngStyle]="{'background-color': (display == true) ? '#e9fbfb' : null}">
       <input type="text"  name="Content" placeholder="Type something here..."
-             [(ngModel)]="messageTemplate.content" />
+             (keyup.enter)="sendMessage(messageTemplate)"
+             [(ngModel)]="messageTemplate.content"/>
       <button mat-icon-button class="send-button" *ngIf="!display"
               [(ngModel)]="messageTemplate.roomId"
               (click)="sendMessage(messageTemplate)" ngDefaultControl>
         <mat-icon>send</mat-icon>
       </button>
-      <button mat-icon-button class="send-button" *ngIf="display" (click)="deleteMessage()">
+      <button mat-icon-button class="send-button" *ngIf="display"
+              (click)="deleteMessage()">
         <mat-icon>delete</mat-icon>
       </button>
       <button mat-icon-button class="send-button" *ngIf="display"
@@ -25,6 +27,7 @@
               (click)="sendMessage(messageTemplate); deleteMessage();" ngDefaultControl>
         <mat-icon>edit</mat-icon>
       </button>
+    </div>
     </div>
   </div>
 </div>
