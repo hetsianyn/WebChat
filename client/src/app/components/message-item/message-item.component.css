@@ -14,9 +14,9 @@
   position: absolute;
   left: calc(100% + 12px);
   bottom: 0;
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 600;
-  color:  #c0c7d2;
+  color: #696e71;
   white-space: nowrap;
 }
 

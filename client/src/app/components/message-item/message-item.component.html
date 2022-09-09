@@ -1,7 +1,7 @@
 <div class="msg-container" (click)="onMessageClicked()">
   <div class="msg-profile">
     <div class="msg-user">User{{message.userId}}</div>
-    <div class="msg-date">{{message.date}}</div>
+    <div class="msg-date">{{message.date | date:'dd MMM yy HH:mm'}}</div>
   </div>
   <div class="msg-content">
     <div class="msg-text" [ngStyle]="{'background-color': (message.userId == 1) ? '#e9fbfb' : null}">{{message.content}}</div>
