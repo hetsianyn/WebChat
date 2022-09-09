@@ -1,8 +1,11 @@
 using BLL.Abstraction;
+using BLL.DTOs;
 using BLL.Mapping;
 using BLL.Repositories;
+using BLL.Validations;
 using DAL;
 using DAL.Extensions;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
@@ -14,9 +17,12 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<DataContext>();
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
 builder.Services.AddScoped<IRoomRepository, RoomRepository>();
+builder.Services.AddScoped<IValidator<MessageDto>, CreateMessageValidator>();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 
 builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
 {

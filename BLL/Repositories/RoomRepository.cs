@@ -1,9 +1,11 @@
-﻿using System.Xml.Xsl;
-using AutoMapper;
+﻿using AutoMapper;
 using BLL.Abstraction;
 using BLL.DTOs;
+using BLL.Validations;
 using DAL;
 using Domain.Models;
+using FluentValidation;
+using FluentValidation.Results;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -13,15 +15,17 @@ public class RoomRepository : IRoomRepository
 {
     private readonly DataContext _context;
     private readonly IMapper _mapper;
-    private readonly IConfiguration _config;
+    private readonly IValidator<MessageDto> _messageValidator;
 
-    public RoomRepository(DataContext context, IMapper mapper, IConfiguration config)
+    public RoomRepository(DataContext context, IMapper mapper, 
+        IValidator<MessageDto> messageValidator)
     {
         _context = context;
         _mapper = mapper;
-        _config = config;
+        _messageValidator = messageValidator;
     }
 
+    //Get all messages in a room
     public async Task<RoomReadDto> GetMessages(int roomId)
     {
         var room = await _context.Rooms
@@ -30,28 +34,17 @@ public class RoomRepository : IRoomRepository
 
         return _mapper.Map<RoomReadDto>(room);
     }
-
-    // public async Task<int> SendMessage(int userId, MessageDto messageDto)
-    // {
-    //
-    //     var user = await _context.Users
-    //         .Include(x => x.Messages)
-    //         .FirstOrDefaultAsync(x => x.Id == userId);
-    //
-    //     // if (user == null)
-    //     //     throw new NotFoundException(nameof(User), userId);
-    //
-    //     var message = _mapper.Map<Message>(messageDto);
-    //
-    //     user.Messages.Add(message);
-    //
-    //     await _context.SaveChangesAsync();
-    //
-    //     return userId;
-    // }
-
+    
+    //Send message to room
     public async Task<int> SendMessage(MessageDto messageDto)
     {
+        //Validation
+        ValidationResult result = await _messageValidator.ValidateAsync(messageDto);
+
+        if (!result.IsValid)
+            throw new ValidationException("Fields can not be empty or null");
+        
+        
         var user = await _context.Users
         .Include(x => x.Messages)
         .FirstOrDefaultAsync(x => x.Id == messageDto.UserId);
@@ -65,6 +58,7 @@ public class RoomRepository : IRoomRepository
         return messageDto.UserId;
     }
 
+    //Delete message
     public async Task<int> DeleteMessage(int messageId)
     {
         var message = await _context.Messages
@@ -76,10 +70,17 @@ public class RoomRepository : IRoomRepository
 
         return messageId;
     }
-
+    
+    //Edit message
     public async Task<int> EditMessage(int messageId, MessageDto messageDto)
     {
+        //Validation
+        ValidationResult result = await _messageValidator.ValidateAsync(messageDto);
 
+        if (!result.IsValid)
+            throw new ValidationException("Fields can not be empty or null");
+
+        
         var message = _context.Messages.Find(messageId);
         // var user = await _context.Users
         //     .Include(x => x.Messages)
@@ -94,6 +95,7 @@ public class RoomRepository : IRoomRepository
         return messageId;
     }
 
+    //Get all rooms
     public async Task<IEnumerable<RoomDto>> GetRooms()
     {
         var rooms = await _context.Rooms
