@@ -47,7 +47,7 @@ public class RoomController : ControllerBase
     }
     
     //Edit message by id
-    [HttpPut("message/edit/{id}")]
+    [HttpPatch("message/{id}/edit")]
     public async Task<ActionResult> UpdateMessage(int id, MessageDto messageDto)
     {
         var response = await _roomRepository.EditMessage(id, messageDto);

@@ -2,7 +2,7 @@ export interface Message{
 
   id?: number;
   content: string;
-  date: Date;
+  date?: Date;
   userId: number;
   roomId: number;
 }

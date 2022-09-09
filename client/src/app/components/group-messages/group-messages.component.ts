@@ -26,10 +26,10 @@ export class GroupMessagesComponent implements OnInit {
 
   messageTemplate: Message = {
     content: '',
-    date: new Date(this.dateNow),
     userId: 1,
     roomId: this.subscribe()
   }
+
 
   selectedMessageId: number;
   deletedMessageId: number;
@@ -78,12 +78,16 @@ export class GroupMessagesComponent implements OnInit {
   }
 
   sendMessage(message: Message){
+    //set sent message date to present time
+    this.messageTemplate.date = new Date(this.dateNow)
+
     this.roomService.createMessage(this.roomId, message)
       .subscribe((message: Message) => {
         this.newMessage.emit(message);
         this.ngOnInit()
       });
 
+    //set input field empty after sending message
     this.messageTemplate.content = '';
   }
 
@@ -95,6 +99,17 @@ export class GroupMessagesComponent implements OnInit {
       })
 
     this.display = !this.display;
+  }
+
+  editMessage(message: Message){
+    this.roomService.editMessage(this.selectedMessageId,message)
+      .subscribe((message: Message) => {
+        this.newMessage.emit(message);
+        this.ngOnInit()
+      });
+
+    //set input field empty after editing message
+    this.messageTemplate.content = '';
   }
 
 }

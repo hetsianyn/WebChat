@@ -23,8 +23,7 @@
         <mat-icon>delete</mat-icon>
       </button>
       <button mat-icon-button class="send-button" *ngIf="display"
-              [(ngModel)]="messageTemplate.roomId"
-              (click)="sendMessage(messageTemplate); deleteMessage();" ngDefaultControl>
+              (click)="editMessage(messageTemplate)" ngDefaultControl>
         <mat-icon>edit</mat-icon>
       </button>
     </div>

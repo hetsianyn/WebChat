@@ -50,9 +50,7 @@ public class RoomRepository : IRoomRepository
         .FirstOrDefaultAsync(x => x.Id == messageDto.UserId);
         
         var message = _mapper.Map<Message>(messageDto);
-        
         user.Messages.Add(message);
-        
         await _context.SaveChangesAsync();
         
         return messageDto.UserId;
@@ -65,7 +63,6 @@ public class RoomRepository : IRoomRepository
             .FirstOrDefaultAsync(x => x.Id == messageId);
 
         _context.Messages.Remove(message);
-
         await _context.SaveChangesAsync();
 
         return messageId;
@@ -81,15 +78,15 @@ public class RoomRepository : IRoomRepository
             throw new ValidationException("Fields can not be empty or null");
 
         
-        var message = _context.Messages.Find(messageId);
+        var message = await _context.Messages.FirstAsync(x => x.Id == messageId);
         // var user = await _context.Users
         //     .Include(x => x.Messages)
         //     .FirstOrDefaultAsync(x => x.Id == userId);
 
-        _mapper.Map(messageDto, message);
-
+        message.Content = messageDto.Content;
+        var date = message.Date;
+        message.Date = date;
         _context.Messages.Update(message);
-
         await _context.SaveChangesAsync();
 
         return messageId;
